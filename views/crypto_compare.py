@@ -75,7 +75,7 @@ def crypto_compare_plot():
         if selected_ids:
             with st.spinner("Generating plot..."):
                 fig = get_crypto_comapare_plot(selected_ids)
-                st.plotly_chart(fig, use_container_width=True, theme=None)
+                st.plotly_chart(fig, use_container_width=True, theme=None, key="crypto_compare_plotly_plot")
         else:
             st.warning("Please select at least one cryptocurrency to generate the plot.")
 
