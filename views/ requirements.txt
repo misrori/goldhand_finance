@@ -1,0 +1,5 @@
+pandas
+goldhand
+plotly
+streamlit
+numpy==1.26.4
