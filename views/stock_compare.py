@@ -43,14 +43,13 @@ def get_plot(tickers):
     )
     return fig
 
-# Load data
+# Caching the Tw object to optimize performance
 @st.cache_data
 def get_tw():
-    """Cache and return the Tw object."""
     return Tw()
 tw = get_tw()
 
-@st.fragment
+st.fragment
 def stock_compare_plot():
     """Display a stock comparison plot with market capitalization trends."""
     # Create the interface

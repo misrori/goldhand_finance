@@ -2,6 +2,7 @@
 import streamlit as st
 from goldhand import *
 
+# Caching the Tw object to optimize performance
 @st.cache_data
 def get_tw():
     return Tw()
