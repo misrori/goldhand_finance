@@ -67,13 +67,11 @@ def show_strategy_tester():
             # Display a basic plot for the selected company
             t = GoldHand(company_name)
             fig = t.plotly_last_year(plot_title=tw.get_plotly_title(company_name), ndays=ndays)
-            st.plotly_chart(fig, use_container_width=True, theme=None)
 
         elif strategy == "Goldhand Line Plot":
             # Display a Goldhand line plot for the selected company
             t = GoldHand(company_name)
             fig = t.plot_goldhand_line(plot_title=tw.get_plotly_title(company_name), ndays=ndays)
-            st.plotly_chart(fig, use_container_width=True, theme=None)
 
         elif strategy == "RSI Strategy":
             # Display results for RSI strategy
