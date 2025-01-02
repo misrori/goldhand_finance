@@ -49,7 +49,7 @@ def get_tw():
     return Tw()
 tw = get_tw()
 
-st.fragment
+@st.fragment
 def stock_compare_plot():
     """Display a stock comparison plot with market capitalization trends."""
     # Create the interface
