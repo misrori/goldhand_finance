@@ -6,33 +6,33 @@ st.set_page_config( layout="wide", page_title="Goldhand Finance",page_icon="📊
 
 # --- INTRO ---
 about_page = st.Page(
-    "views/introduction.py",
+    "views/001_introduction.py",
     title="About this app",
     icon=":material/account_circle:",
     default=True,
 )
 
 st_infos_page = st.Page(
-    "views/strategy_infos.py",
+    "views/002_strategy_infos.py",
     title="Strategies info",
     icon=":material/trending_up:",
 )
 
 # --- STOCK ---
 stock_view_page = st.Page(
-    "views/stock_view_page.py",
+    "views/003_stock_view_page.py",
     title="Stock View",
     icon=":material/bar_chart:",
 )
 
 stock_trading_strategy_page = st.Page(
-    "views/stock_trading_strategy.py",
+    "views/004_stock_trading_strategy.py",
     title="Stock Trading Strategy",
     icon=":material/bar_chart:",
 )
 
 stock_compare_page = st.Page(
-    "views/stock_compare.py",
+    "views/005_stock_compare.py",
     title="Stock compare",
     icon=":material/bar_chart:",
 )
@@ -40,19 +40,19 @@ stock_compare_page = st.Page(
 # --- CRYPTO ---
 
 crypto_view_page = st.Page(
-    "views/crypto_view_page.py",
+    "views/006_crypto_view_page.py",
     title="Crypto View",
     icon=":material/bar_chart:",
 )
 
 crypto_trading_strategy_page = st.Page(
-    "views/crypto_trading_strategy.py",
+    "views/007_crypto_trading_strategy.py",
     title="Crypto Trading Strategy",
     icon=":material/bar_chart:",
 )
 
 crypto_compare_page = st.Page(
-    "views/crypto_compare.py",
+    "views/008_crypto_compare.py",
     title="Crypto compare",
     icon=":material/bar_chart:",
 )

@@ -1,10 +1,12 @@
 import streamlit as st
 from goldhand import *
+import pickle
 
 # Caching the Tw object for better performance
-@st.cache_data
+@st.cache_data()
 def get_tw():
-    return Tw()
+    tw = Tw()
+    return tw
 tw = get_tw()
 
 @st.fragment

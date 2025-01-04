@@ -2,10 +2,12 @@ import streamlit as st
 from goldhand import *
 
 # Caching the Tw object to optimize performance
-@st.cache_data
+@st.cache_data()
 def get_tw():
-    return Tw()
+    tw = Tw()
+    return tw
 tw = get_tw()
+
 
 def format_large_number(number):
     """
@@ -17,6 +19,8 @@ def format_large_number(number):
         return f"{round(number / 1_000_000_000, 2)}B"  # Billions
     elif number >= 1_000_000:
         return f"{round(number / 1_000_000, 2)}M"  # Millions
+    elif number >= 1_000:
+        return f"{round(number / 1_000, 2)}K"
     else:
         return f"{round(number, 2)}"
 
@@ -28,6 +32,8 @@ def crypto_dashboard():
         with st.container(border=True):
             st.markdown("#### Explore detailed insights about your selected cryptocurrency.")
             selected_description = st.selectbox("", tw.crypto["base_currency_desc"])
+
+ 
 
     # Retrieve the selected ticker ID
     user_ticker = tw.crypto.loc[tw.crypto["base_currency_desc"] == selected_description, "base_currency"].values[0] + '-USD'
@@ -50,11 +56,12 @@ def crypto_dashboard():
     # Second row: Display four metrics
     st.markdown("### Cryptocurrency Metrics")
     metrics = [
+        {"label": "Price", "value": f"${format_large_number(crypto_data['close'])}" },
         {"label": "Market Capitalization", "value": f"${format_large_number(crypto_data['market_cap_calc'])}"},
         {"label": "24h Volume", "value": f"${format_large_number(crypto_data['24h_vol_cmc'])}"},
         {"label": "24h Change", "value": format_large_number(crypto_data["24h_close_change|5"])},
         {"label": "Circulating Supply", "value": format_large_number(crypto_data["circulating_supply"])},
-        {"label": "Ticker", "value": crypto_data["ticker"]},
+        
     ]
 
     col1, col2, col3, col4, col5 = st.columns(5)

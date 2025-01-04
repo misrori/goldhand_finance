@@ -3,10 +3,12 @@ import streamlit as st
 from goldhand import *
 
 # Caching the Tw object to optimize performance
-@st.cache_data
+@st.cache_data()
 def get_tw():
-    return Tw()
+    tw = Tw()
+    return tw
 tw = get_tw()
+
 
 @st.fragment
 def show_crypto_strategy_tester():

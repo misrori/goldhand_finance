@@ -44,10 +44,12 @@ def get_plot(tickers):
     return fig
 
 # Caching the Tw object to optimize performance
-@st.cache_data
+@st.cache_data()
 def get_tw():
-    return Tw()
+    tw = Tw()
+    return tw
 tw = get_tw()
+
 
 @st.fragment
 def stock_compare_plot():

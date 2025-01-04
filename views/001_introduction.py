@@ -1,6 +1,7 @@
 
 import streamlit as st
 
+
 st.markdown("""
 ## 🌟 About This Project
 Dive into the world of **stock market analysis**! This platform is designed to empower you with insightful tools to make informed decisions. Whether you're a seasoned investor or just starting out, our application offers something for everyone. 🚀
@@ -18,9 +19,14 @@ Dive into the world of **stock market analysis**! This platform is designed to e
 ### 🚀 Ready to Explore?
 Navigate using the sidebar to discover our unique features and uncover new investment opportunities! 🌟
 
+if st.button("Refresh Data"):
+    st.cache_data.clear()
+    st.rerun()
+
 ---
 Designed and developed with ❤️ by Orsós Mihály and powered by the **Goldhand Python Package**.
 """)
+
 
 
 
