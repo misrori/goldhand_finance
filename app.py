@@ -75,7 +75,7 @@ pg = st.navigation(
 # --- SHARED ON ALL PAGES ---
 st.logo(
     'https://i.ibb.co/Pgw52bM/Screenshot-from-2024-12-26-09-41-17-removebg-preview.png',
-    link="https://streamlit.io/gallery",
+    link="https://goldhandfinance.streamlit.app/",
     size="large")
 
 st.sidebar.markdown("Made with ❤️ by [Goldhandfinance](https://youtube.com/@goldhandfinance)")
