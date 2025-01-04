@@ -37,6 +37,7 @@ stock_compare_page = st.Page(
     icon=":material/bar_chart:",
 )
 
+
 # --- CRYPTO ---
 
 crypto_view_page = st.Page(
