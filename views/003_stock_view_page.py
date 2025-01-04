@@ -38,8 +38,8 @@ def stock_dashboard():
     # Second row: Displaying stock metrics
     st.markdown("### Stock Metrics")
     metrics = [
+        {"label": "Price", "value": round(company_data["close"], 2)},
         {"label": "Price-to-Earnings (P/E)", "value": round(company_data["price_earnings_ttm"], 2)},
-        {"label": "Beta (1 Year)", "value": round(company_data["beta_1_year"], 2)},
         {"label": "52-Week High", "value": f"${round(company_data['price_52_week_high'], 2)}"},
         {"label": "52-Week Low", "value": f"${round(company_data['price_52_week_low'], 2)}"},
         {"label": "RSI", "value": int(company_data["RSI7"])},
