@@ -18,7 +18,8 @@ Dive into the world of **stock market analysis**! This platform is designed to e
 
 ### 🚀 Ready to Explore?
 Navigate using the sidebar to discover our unique features and uncover new investment opportunities! 🌟
-"""
+""")
+
 if st.button("Refresh Data"):
     st.cache_data.clear()
     st.rerun()
