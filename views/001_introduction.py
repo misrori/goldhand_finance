@@ -22,16 +22,8 @@ Navigate using the sidebar to discover our unique features and uncover new inves
 Designed and developed with ❤️ by Orsós Mihály and powered by the **Goldhand Python Package**.
 """)
 
-# Initialize session state variable to track execution
-if "clear_cache_executed" not in st.session_state:
-    st.session_state["clear_cache_executed"] = False
-
-# Check and execute the code only once
-if not st.session_state["clear_cache_executed"]:
-    st.cache_data.clear()  # Clear cache
-    st.session_state["clear_cache_executed"] = True  # Mark as executed
-    st.rerun() 
-
+st.cache_data.clear()
+st.rerun()
 
 
 
