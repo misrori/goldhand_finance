@@ -18,12 +18,21 @@ Dive into the world of **stock market analysis**! This platform is designed to e
 
 ### 🚀 Ready to Explore?
 Navigate using the sidebar to discover our unique features and uncover new investment opportunities! 🌟
+
 ---
 Designed and developed with ❤️ by Orsós Mihály and powered by the **Goldhand Python Package**.
 """)
 
-st.cache_data.clear()
-st.rerun()
+# Initialize session state variable to track execution
+if "clear_cache_executed" not in st.session_state:
+    st.session_state["clear_cache_executed"] = False
+
+# Check and execute the code only once
+if not st.session_state["clear_cache_executed"]:
+    st.cache_data.clear()  # Clear cache
+    st.session_state["clear_cache_executed"] = True  # Mark as executed
+    st.rerun()  
+
 
 
 
