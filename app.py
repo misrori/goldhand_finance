@@ -38,6 +38,7 @@ stock_compare_page = st.Page(
 )
 
 
+
 # --- CRYPTO ---
 
 crypto_view_page = st.Page(
