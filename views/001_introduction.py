@@ -33,6 +33,10 @@ if not st.session_state["clear_cache_executed"]:
     st.session_state["clear_cache_executed"] = True  # Mark as executed
     st.rerun()  
 
-
+# manual rerun
+if st.button("Clear cache and rerun"):
+    st.cache_data.clear()  # Clear cache
+    st.session_state["clear_cache_executed"] = True  # Mark as executed
+    st.rerun()
 
 
