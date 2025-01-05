@@ -110,7 +110,6 @@ def show_stock_watch():
             t = GoldHand(selected_stock_ticker)
             st.plotly_chart(t.plotly_last_year(tw.get_plotly_title(selected_stock_ticker)), use_container_width=False, theme=None)
 
-        
 
     
 show_stock_watch()
