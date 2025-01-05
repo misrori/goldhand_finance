@@ -37,24 +37,31 @@ stock_compare_page = st.Page(
     icon=":material/bar_chart:",
 )
 
+stock_watch_page = st.Page(
+    "views/006_stock_watch.py",
+    title="Stock filter",
+    icon=":material/bar_chart:",
+)
+
+
 
 
 # --- CRYPTO ---
 
 crypto_view_page = st.Page(
-    "views/006_crypto_view_page.py",
+    "views/007_crypto_view_page.py",
     title="Crypto View",
     icon=":material/bar_chart:",
 )
 
 crypto_trading_strategy_page = st.Page(
-    "views/007_crypto_trading_strategy.py",
+    "views/008_crypto_trading_strategy.py",
     title="Crypto Trading Strategy",
     icon=":material/bar_chart:",
 )
 
 crypto_compare_page = st.Page(
-    "views/008_crypto_compare.py",
+    "views/009_crypto_compare.py",
     title="Crypto compare",
     icon=":material/bar_chart:",
 )
@@ -66,7 +73,7 @@ crypto_compare_page = st.Page(
 pg = st.navigation(
     {
         "Info": [about_page, st_infos_page],
-        "Stocks": [stock_view_page, stock_trading_strategy_page, stock_compare_page],
+        "Stocks": [stock_view_page, stock_trading_strategy_page, stock_compare_page, stock_watch_page],
         "Crypto": [crypto_view_page, crypto_trading_strategy_page, crypto_compare_page],
     }
 )
