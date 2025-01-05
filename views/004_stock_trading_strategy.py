@@ -7,6 +7,7 @@ import pandas as pd
 @st.cache_data()
 def get_tw():
     tw = Tw()
+    tw.stock['display_name'] = tw.stock['description'] + ' (' + tw.stock['name'] + ')'
     return tw
 tw = get_tw()
 
@@ -24,8 +25,8 @@ def show_strategy_tester():
     with col1:
         with st.container(border=True):
             # Dropdown for selecting a company
-            selected_description = st.selectbox("Select a company:", tw.stock["description"])
-            company_name = tw.stock.loc[tw.stock["description"] == selected_description, "name"].values[0]
+            selected_description = st.selectbox("Select a company:", tw.stock["display_name"])
+            company_name = tw.stock.loc[tw.stock["display_name"] == selected_description, "name"].values[0]
 
     with col2:
         with st.container(border=True):

@@ -1,5 +1,14 @@
 import streamlit as st
 import pandas as pd
+from goldhand import *
+
+@st.cache_data()
+def get_tw():
+    tw = Tw()
+    tw.stock['display_name'] = tw.stock['description'] + ' (' + tw.stock['name'] + ')'
+    return tw
+tw = get_tw()
+
 
 @st.cache_data()
 def get_money_data():
@@ -71,23 +80,37 @@ def show_stock_watch():
         elif condition:  # If there are selected values
             filtered_df = filtered_df[filtered_df[col].isin(condition)]
 
+    # merge with the stock name by ticker
+    filtered_df =pd.merge(filtered_df, tw.stock[['name', 'description']], left_on='ticker', right_on='name', how='left')
+    
+    # rename the column description to stock name
+    filtered_df.rename(columns={'description': 'stock_name'}, inplace=True)
     
     # Reorder and select only the desired columns
     display_columns = [
-        'ticker',  'rsi_status', 'ghl_status', 'diff_sma50', 
+        'stock_name', 'ticker',  'rsi_status', 'ghl_status', 'diff_sma50', 
         'diff_sma100', 'diff_sma200', 'number_of_employees', 'price_per_earning','sector', 'industry', 'volume'
     ]
     filtered_df = filtered_df[display_columns]
     
     
-    # Display the DataFrame with the data editor
-    edited_df = st.data_editor(
-        filtered_df,    
+
+    event = st.dataframe(
+        filtered_df,
+        use_container_width=True,
         hide_index=True,
-        num_rows="dynamic"
-
+        on_select="rerun",
+        selection_mode="single-row",
     )
+    
+    row_id = event.selection.rows
+    selected_stock_ticker = filtered_df.iloc[row_id]['ticker'].iloc[0]
+    if selected_stock_ticker:    
+        with st.container(border=True):
+            t = GoldHand(selected_stock_ticker)
+            st.plotly_chart(t.plotly_last_year(tw.get_plotly_title(selected_stock_ticker)), use_container_width=False, theme=None)
 
+        
 
     
 show_stock_watch()

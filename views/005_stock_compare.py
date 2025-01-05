@@ -69,6 +69,7 @@ def get_plot(tickers, view="market_cap", date_range=None):
 @st.cache_data()
 def get_tw():
     tw = Tw()
+    tw.stock['display_name'] = tw.stock['description'] + ' (' + tw.stock['name'] + ')'
     return tw
 tw = get_tw()
 
@@ -84,7 +85,7 @@ def stock_compare_plot():
     with st.container(border=True):
         selected_stocks = st.multiselect(
             "Choose stocks:",
-            options=tw.stock["description"].tolist(),
+            options=tw.stock["display_name"].tolist(),
             default=[]
         )
     
@@ -132,7 +133,7 @@ def stock_compare_plot():
     if st.button("Generate Plot"):
         # Retrieve IDs of the selected stocks
         selected_ids = [
-            tw.stock.loc[tw.stock["description"] == stock, "name"].values[0]
+            tw.stock.loc[tw.stock["display_name"] == stock, "name"].values[0]
             for stock in selected_stocks
         ]
 

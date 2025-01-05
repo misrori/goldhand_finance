@@ -6,6 +6,7 @@ import pickle
 @st.cache_data()
 def get_tw():
     tw = Tw()
+    tw.stock['display_name'] = tw.stock['description'] + ' (' + tw.stock['name'] + ')'
     return tw
 tw = get_tw()
 
@@ -19,10 +20,10 @@ def stock_dashboard():
     with col1:
         with st.container(border=True):
             st.markdown("##### Select a Stock")
-            selected_description = st.selectbox("", tw.stock["description"])
+            selected_description = st.selectbox("", tw.stock["display_name"])
 
-    user_ticker = tw.stock.loc[tw.stock["description"] == selected_description, "name"].values[0]
-    company_data = tw.stock.loc[tw.stock["description"] == selected_description].iloc[0]
+    user_ticker = tw.stock.loc[tw.stock["display_name"] == selected_description, "name"].values[0]
+    company_data = tw.stock.loc[tw.stock["display_name"] == selected_description].iloc[0]
 
     with col2:
         with st.container(border=True):
