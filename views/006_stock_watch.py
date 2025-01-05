@@ -23,6 +23,7 @@ def show_stock_watch():
         'ghl_color': 'Goldhand color',
         'ghl_days_since_last_change': 'Days since last Goldhand change',
         'ghl_change_percent_from_last_change': 'Percentage change since last Goldhand change',
+        'rsi':'Relative Strength Index',
         'rsi_status': 'RSI strategy status',
         'rsi_days_since_last_change': 'Days since last RSI strategy change',
         'rsi_change_percent_from_last_change': 'Percentage change since last RSI strategy change',
