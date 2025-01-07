@@ -10,6 +10,15 @@ def get_tw():
     return tw
 tw = get_tw()
 
+def update_index():
+    st.session_state.current_index = int(tw.stock[tw.stock['display_name'] == st.session_state.swstock].index[0])
+
+# Initialize session state for sw_current_index
+if "sw_current_index" not in st.session_state:
+    st.session_state.sw_current_index = 0
+    
+    
+
 @st.fragment
 def stock_dashboard():
     """Stock Dashboard for displaying stock details and visualizations."""
@@ -20,10 +29,26 @@ def stock_dashboard():
     with col1:
         with st.container(border=True):
             st.markdown("##### Select a Stock")
-            selected_description = st.selectbox("", tw.stock["display_name"])
+            selected_description = st.selectbox(
+                "", 
+                tw.stock["display_name"], 
+                key="swstock",
+                index=st.session_state.sw_current_index, 
+                on_change=lambda: update_index()
+            )
+            
+            label_of_next_button = f'Next: {tw.stock["display_name"][(st.session_state.sw_current_index + 1) % len(tw.stock)]}'
 
-    user_ticker = tw.stock.loc[tw.stock["display_name"] == selected_description, "name"].values[0]
-    company_data = tw.stock.loc[tw.stock["display_name"] == selected_description].iloc[0]
+            # next button
+            if st.button(label_of_next_button):
+                st.session_state.sw_current_index = (st.session_state.sw_current_index + 1) % len(tw.stock)
+                st.rerun(scope="fragment")
+
+    #user_ticker = tw.stock.loc[tw.stock["display_name"] == selected_description, "name"].values[0]
+    #company_data = tw.stock.loc[tw.stock["display_name"] == selected_description].iloc[0]
+    user_ticker = tw.stock.loc[st.session_state.sw_current_index, "name"]
+    company_data = tw.stock.loc[st.session_state.sw_current_index]
+    
 
     with col2:
         with st.container(border=True):
