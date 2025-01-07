@@ -13,6 +13,7 @@ tw = get_tw()
 @st.cache_data()
 def get_money_data():
     df = pd.read_csv('https://raw.githubusercontent.com/misrori/money_flow/refs/heads/main/last_stocks_update.csv')
+    df =pd.merge(df, tw.stock[['name', 'description']], left_on='ticker', right_on='name', how='left')
     return df
 
 stock_moves = get_money_data()
@@ -81,7 +82,7 @@ def show_stock_watch():
             filtered_df = filtered_df[filtered_df[col].isin(condition)]
 
     # merge with the stock name by ticker
-    filtered_df =pd.merge(filtered_df, tw.stock[['name', 'description']], left_on='ticker', right_on='name', how='left')
+    #filtered_df =pd.merge(filtered_df, tw.stock[['name', 'description']], left_on='ticker', right_on='name', how='left')
     
     # rename the column description to stock name
     filtered_df.rename(columns={'description': 'stock_name'}, inplace=True)
@@ -104,8 +105,8 @@ def show_stock_watch():
     )
     
     row_id = event.selection.rows
-    selected_stock_ticker = filtered_df.iloc[row_id]['ticker'].iloc[0]
-    if selected_stock_ticker:    
+    if row_id:
+        selected_stock_ticker = filtered_df.iloc[row_id]['ticker'].iloc[0]      
         with st.container(border=True):
             t = GoldHand(selected_stock_ticker)
             st.plotly_chart(t.plotly_last_year(tw.get_plotly_title(selected_stock_ticker)), use_container_width=False, theme=None)

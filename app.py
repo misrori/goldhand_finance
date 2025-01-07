@@ -1,6 +1,7 @@
 import streamlit as st
 from goldhand import *
 
+
 st.set_page_config( layout="wide", page_title="Goldhand Finance",page_icon="📊",)
 
 
@@ -66,6 +67,29 @@ crypto_compare_page = st.Page(
     icon=":material/bar_chart:",
 )
 
+
+### Trends
+ai_trend_page = st.Page(
+    "views/011_trends_ai.py",
+    title="AI Trend",
+    icon=":material/bar_chart:",
+)
+
+
+quantum_trend_page = st.Page(
+    "views/012_trends_quantum.py",
+    title="Quantum Trend",
+    icon=":material/bar_chart:",
+)
+
+
+trends_cybersecurity_page = st.Page(
+    "views/013_trends_cybersecurity.py",
+    title="Cybersecurity Trends",
+    icon=":material/bar_chart:",
+)
+
+
 # --- NAVIGATION SETUP [WITHOUT SECTIONS] ---
 # pg = st.navigation(pages=[about_page, project_1_page, project_2_page])
 
@@ -75,6 +99,7 @@ pg = st.navigation(
         "Info": [about_page, st_infos_page],
         "Stocks": [stock_view_page, stock_trading_strategy_page, stock_compare_page, stock_watch_page],
         "Crypto": [crypto_view_page, crypto_trading_strategy_page, crypto_compare_page],
+        "Hot trends": [ai_trend_page, quantum_trend_page, trends_cybersecurity_page],
     }
 )
 
