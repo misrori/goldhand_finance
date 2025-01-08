@@ -24,7 +24,7 @@ def stock_dashboard():
     """Stock Dashboard for displaying stock details and visualizations."""
 
     # First row: Dropdown menu for stock selection and additional info
-    col1, col2, col3, col4 = st.columns([2, 1.4, 1.3, 1.3], vertical_alignment="center")
+    col1, col2, col3,  = st.columns([2, 1.4, 1.3], vertical_alignment="center")
     with col1:
         with st.container(border=True):
             st.markdown("##### Select a Stock")
@@ -36,13 +36,8 @@ def stock_dashboard():
                 on_change=lambda: update_index()
             )
             
-            label_of_next_button = f'Next: {tw.stock["display_name"][(st.session_state.sw_current_index + 1) % len(tw.stock)]}'
-    with col2:
-        with st.container(border=True):
-            # next button
-            if st.button(label_of_next_button):
-                st.session_state.sw_current_index = (st.session_state.sw_current_index + 1) % len(tw.stock)
-                st.rerun(scope="fragment")
+
+
 
     #user_ticker = tw.stock.loc[tw.stock["display_name"] == selected_description, "name"].values[0]
     #company_data = tw.stock.loc[tw.stock["display_name"] == selected_description].iloc[0]
@@ -50,7 +45,7 @@ def stock_dashboard():
     company_data = tw.stock.loc[st.session_state.sw_current_index]
     
 
-    with col3:
+    with col2:
         with st.container(border=True):
             st.markdown("##### More Info")
             tradingview_url = f"https://www.tradingview.com/chart/?symbol={user_ticker}"
@@ -80,9 +75,19 @@ def stock_dashboard():
                     st.metric(label=metric["label"], value=metric["value"])
 
         st.divider()
+ 
 
     # Third row: Stock price chart
-    st.markdown("### Stock Price Over the Last Year")
+    col1, col2 = st.columns([1.5, 2])
+    with col1: 
+        st.markdown("### Stock Price Over the Last Year")
+    with col2:
+        label_of_next_button = f'Next: {tw.stock["display_name"][(st.session_state.sw_current_index + 1) % len(tw.stock)]}'
+
+        if st.button(label_of_next_button):
+            st.session_state.sw_current_index = (st.session_state.sw_current_index + 1) % len(tw.stock)
+            st.rerun(scope="fragment")
+        
     with st.container(border=True):
         t = GoldHand(user_ticker)
         st.plotly_chart(t.plotly_last_year(tw.get_plotly_title(user_ticker)), use_container_width=False, theme=None)

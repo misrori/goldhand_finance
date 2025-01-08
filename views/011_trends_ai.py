@@ -126,10 +126,6 @@ def ai_stock_compare_plot():
                     date_range = (pd.Timestamp.now() - pd.Timedelta(days=days)).strftime('%Y-%m-%d'), pd.Timestamp.now().strftime('%Y-%m-%d')
 
             
-
-
-
-
     # Generate the plot
     if st.button("Generate Plot"):
         # Retrieve IDs of the selected stocks

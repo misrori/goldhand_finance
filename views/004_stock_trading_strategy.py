@@ -11,6 +11,15 @@ def get_tw():
     return tw
 tw = get_tw()
 
+
+def update_index():
+    st.session_state.stt_current_index = int(tw.stock[tw.stock['display_name'] == st.session_state.sttstock].index[0])
+
+# Initialize session state for sw_current_index
+if "stt_current_index" not in st.session_state:
+    st.session_state.stt_current_index = 0
+    
+
 @st.fragment
 def show_strategy_tester():
     """Display the trading strategy tester interface."""
@@ -25,13 +34,19 @@ def show_strategy_tester():
     with col1:
         with st.container(border=True):
             # Dropdown for selecting a company
-            selected_description = st.selectbox("Select a company:", tw.stock["display_name"])
+            selected_description = st.selectbox(
+                "Select a company:", 
+                tw.stock["display_name"], 
+                key="sttstock", 
+                index=st.session_state.stt_current_index, 
+                on_change=lambda: update_index()
+                )
             company_name = tw.stock.loc[tw.stock["display_name"] == selected_description, "name"].values[0]
 
     with col2:
         with st.container(border=True):
             # Input for selecting the number of days
-            ndays = st.number_input("Number of days:", min_value=1, max_value=5000, value=800, step=10)
+            ndays = st.number_input("Number of days:", min_value=1, max_value=10000, value=800, step=50)
 
     # Layout: Strategies displayed in a single row
     with col3:
@@ -97,6 +112,17 @@ def show_strategy_tester():
 
         else:
             st.error("Unknown strategy selected!")
+            
+        # Third row: Stock price chart
+        col1, col2 = st.columns([1.5, 2])
+        with col1: 
+            st.markdown(f"### {strategy} for {selected_description}")
+        with col2:
+            label_of_next_button = f'Next: {tw.stock["display_name"][(st.session_state.stt_current_index + 1) % len(tw.stock)]}'
+
+            if st.button(label_of_next_button):
+                st.session_state.stt_current_index = (st.session_state.stt_current_index + 1) % len(tw.stock)
+                st.rerun(scope="fragment")
 
         # Display the results
         with st.container(border=True):
