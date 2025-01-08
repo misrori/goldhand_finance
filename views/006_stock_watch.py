@@ -28,10 +28,16 @@ if 'selected_filtered_index' not in st.session_state:
 
 
 def update_index(temp_df):
-    st.session_state.selected_filtered_index = int(temp_df[temp_df['display_name'] == st.session_state.selected_filtered_id].index[0])
+    try:
+        st.session_state.selected_filtered_index = int(temp_df[temp_df['display_name'] == st.session_state.selected_filtered_id].index[0])
+    except:
+        pass
 
 def zero_index():
-    st.session_state.selected_filtered_index = 0
+    try:
+        st.session_state.selected_filtered_index = 0
+    except:
+        pass
 
 @st.fragment
 def show_stock_filter():
@@ -132,7 +138,7 @@ def show_stock_filter():
             st.session_state.filtered_df = pd.DataFrame()
             
     with tab2:
-    
+        
         if len(st.session_state.filtered_df) > 0:
             
             temp_df = st.session_state.filtered_df.copy()
@@ -236,7 +242,7 @@ def show_stock_filter():
                 # Display the results
                 with st.container(border=True):
                     st.plotly_chart(fig, use_container_width=True, theme=None)
-                
+
 
 
 
