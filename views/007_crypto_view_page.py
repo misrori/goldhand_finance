@@ -2,9 +2,21 @@ import streamlit as st
 from goldhand import *
 
 # Caching the Tw object to optimize performance
+
+def update_crypto_index():
+    st.session_state.cw_current_index = int(tw.crypto[tw.crypto['display_name'] == st.session_state.cwstock].index[0])
+
+# Initialize session state for sw_current_index
+if "cw_current_index" not in st.session_state:
+    st.session_state.cw_current_index = 0
+     
+
+
+
 @st.cache_data()
 def get_tw():
     tw = Tw()
+    tw.crypto['display_name'] = tw.crypto['base_currency_desc'] + ' (' + tw.crypto['base_currency'] + ')'
     return tw
 tw = get_tw()
 
@@ -31,15 +43,20 @@ def crypto_dashboard():
     with col1:
         with st.container(border=True):
             st.markdown("#### Explore detailed insights about your selected cryptocurrency.")
-            selected_description = st.selectbox("", tw.crypto["base_currency_desc"])
+            selected_description = st.selectbox("", tw.crypto["display_name"], key="cwstock", index=st.session_state.cw_current_index, on_change=lambda: update_crypto_index())
 
  
 
     # Retrieve the selected ticker ID
-    user_ticker = tw.crypto.loc[tw.crypto["base_currency_desc"] == selected_description, "base_currency"].values[0] + '-USD'
-
+    #user_ticker = tw.crypto.loc[tw.crypto["display_name"] == selected_description, "ticker"].values[0]
     # Data for the selected cryptocurrency
-    crypto_data = tw.crypto.loc[tw.crypto["base_currency_desc"] == selected_description].iloc[0]
+    #crypto_data = tw.crypto.loc[tw.crypto["display_name"] == selected_description].iloc[0]
+    
+    
+    user_ticker = tw.crypto.loc[st.session_state.cw_current_index, "ticker"]
+    crypto_data = tw.crypto.loc[st.session_state.cw_current_index]
+    
+    
 
     with col2:
         with st.container(border=True):
@@ -89,9 +106,31 @@ def crypto_dashboard():
     st.divider()
 
     # Third row: Cryptocurrency price evolution over the last year
-    st.markdown("### Cryptocurrency Price Over the Last Year")
+    col1, col2 = st.columns([1.5, 2])
+    with col1: 
+        st.markdown("### Crypto Price Over the Last Year")
+    with col2:
+        label_of_next_button = f'Next: {tw.crypto["display_name"][(st.session_state.cw_current_index + 1) % len(tw.crypto)]}'
+                            #  f'Next: {tw.stock["display_name"][(st.session_state.sw_current_index + 1) % len(tw.stock)]}'
+
+        
+        
+        if st.button(label_of_next_button):
+            st.session_state.cw_current_index = (st.session_state.cw_current_index + 1) % len(tw.stock)
+            st.rerun(scope="fragment")
+        
     with st.container(border=True):
         t = GoldHand(user_ticker)
         st.plotly_chart(t.plotly_last_year(tw.get_plotly_title(user_ticker)), use_container_width=False, theme=None)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 crypto_dashboard()
