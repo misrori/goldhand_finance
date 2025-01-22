@@ -42,7 +42,7 @@ def crypto_dashboard():
     col1, col2, col3 = st.columns([2, 1.4, 2])
     with col1:
         with st.container(border=True):
-            st.markdown("#### Explore detailed insights about your selected cryptocurrency.")
+            st.markdown("#### Select a cryptocurrency.")
             selected_description = st.selectbox("", tw.crypto["display_name"], key="cwstock", index=st.session_state.cw_current_index, on_change=lambda: update_crypto_index())
 
  
@@ -71,7 +71,6 @@ def crypto_dashboard():
             )
 
     # Second row: Display four metrics
-    st.markdown("### Cryptocurrency Metrics")
     metrics = [
         {"label": "Price", "value": f"${format_large_number(crypto_data['close'])}" },
         {"label": "Market Capitalization", "value": f"${format_large_number(crypto_data['market_cap_calc'])}"},
@@ -81,28 +80,30 @@ def crypto_dashboard():
         
     ]
 
-    col1, col2, col3, col4, col5 = st.columns(5)
 
     # Display metrics in their respective containers
-    with col1:
-        with st.container(border=True):
-            st.metric(label=metrics[0]["label"], value=metrics[0]["value"])
+    with st.expander('### Cryptocurrency Metrics', expanded=True):
+        col1, col2, col3, col4, col5 = st.columns(5)
 
-    with col2:
-        with st.container(border=True):
-            st.metric(label=metrics[1]["label"], value=metrics[1]["value"])
+        with col1:
+            with st.container(border=True):
+                st.metric(label=metrics[0]["label"], value=metrics[0]["value"])
 
-    with col3:
-        with st.container(border=True):
-            st.metric(label=metrics[2]["label"], value=metrics[2]["value"])
+        with col2:
+            with st.container(border=True):
+                st.metric(label=metrics[1]["label"], value=metrics[1]["value"])
 
-    with col4:
-        with st.container(border=True):
-            st.metric(label=metrics[3]["label"], value=metrics[3]["value"])
+        with col3:
+            with st.container(border=True):
+                st.metric(label=metrics[2]["label"], value=metrics[2]["value"])
 
-    with col5:
-        with st.container(border=True):
-            st.metric(label=metrics[4]["label"], value=metrics[4]["value"])
+        with col4:
+            with st.container(border=True):
+                st.metric(label=metrics[3]["label"], value=metrics[3]["value"])
+
+        with col5:
+            with st.container(border=True):
+                st.metric(label=metrics[4]["label"], value=metrics[4]["value"])
     st.divider()
 
     # Third row: Cryptocurrency price evolution over the last year

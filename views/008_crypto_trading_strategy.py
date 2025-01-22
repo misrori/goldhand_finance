@@ -6,8 +6,15 @@ from goldhand import *
 @st.cache_data()
 def get_tw():
     tw = Tw()
+    tw.crypto['display_name'] = tw.crypto['base_currency_desc'] + ' (' + tw.crypto['base_currency'] + ')'
     return tw
 tw = get_tw()
+
+if "ct_current_index" not in st.session_state:
+    st.session_state.ct_current_index = 0
+    
+def update_crypto_index():  
+    st.session_state.ct_current_index = int(tw.crypto[tw.crypto['display_name'] == st.session_state.ctstock].index[0])
 
 
 @st.fragment
@@ -22,8 +29,12 @@ def show_crypto_strategy_tester():
 
     with col1:
         with st.container(border=True):
-            selected_description = st.selectbox("Select a cryptocurrency:", tw.crypto["base_currency_desc"])
-            crypto_name = tw.crypto.loc[tw.crypto["base_currency_desc"] == selected_description, "base_currency"].values[0] + '-USD'
+            
+            selected_description = st.selectbox("", tw.crypto["display_name"], key="ctstock", index=st.session_state.ct_current_index, on_change=lambda: update_crypto_index())
+            
+            crypto_name = tw.crypto.loc[st.session_state.ct_current_index, "ticker"]
+            crypto_data = tw.crypto.loc[st.session_state.ct_current_index]
+                    
 
     with col2:
         with st.container(border=True):
@@ -83,6 +94,18 @@ def show_crypto_strategy_tester():
             )
         else:
             st.error("Unknown strategy selected!")
+
+
+        
+        col1, col2 = st.columns([1.5, 2])
+        with col1: 
+            st.markdown(f"### {strategy} for {selected_description}")
+        with col2:
+            label_of_next_button = f'Next: {tw.crypto["display_name"][(st.session_state.ct_current_index + 1) % len(tw.crypto)]}'
+
+            if st.button(label_of_next_button):
+                st.session_state.ct_current_index = (st.session_state.ct_current_index + 1) % len(tw.crypto)
+                st.rerun(scope="fragment")
 
         # Displaying the results
         with st.container(border=True):
