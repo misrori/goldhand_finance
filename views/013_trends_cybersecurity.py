@@ -21,10 +21,8 @@ def cybersecurity_stock_compare_plot():
         selected_stocks = st.multiselect(
             "Choose stocks:",
             options=tw.stock["display_name"].tolist(),
-            default=[]
-        )
-    st.write("Selected stocks: ", '","'.join(selected_stocks))
-    
+            default=["Palo Alto Networks, Inc. (PANW)","Fortinet, Inc. (FTNT)","Check Point Software Technologies Ltd. (CHKP)","Cisco Systems, Inc. (CSCO)","Juniper Networks, Inc. (JNPR)","Microsoft Corporation (MSFT)","International Business Machines Corporation (IBM)","Oracle Corporation (ORCL)","Qualys, Inc. (QLYS)","CyberArk Software Ltd. (CYBR)","Hub Cyber Security Ltd. (HUBC)","Okta, Inc. (OKTA)","Zscaler, Inc. (ZS)","Tenable Holdings, Inc. (TENB)","Varonis Systems, Inc. (VRNS)","Rapid7, Inc. (RPD)","CrowdStrike Holdings, Inc. (CRWD)","SentinelOne, Inc. (S)","Cloudflare, Inc. (NET)"]
+        )    
     col1, col2 = st.columns([1.4, 2])
     with col1:   
         with st.container(border=True):

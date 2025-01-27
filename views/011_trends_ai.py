@@ -27,9 +27,7 @@ def ai_stock_compare_plot():
             "Choose stocks:",
             options=tw.stock["display_name"].tolist(),
             default=["NVIDIA Corporation (NVDA)", "Microsoft Corporation (MSFT)", "Alphabet Inc. (GOOG)","Amazon.com, Inc. (AMZN)","Advanced Micro Devices, Inc. (AMD)","International Business Machines Corporation (IBM)","Palantir Technologies Inc. (PLTR)","C3.ai, Inc. (AI)","Arista Networks, Inc. (ANET)","QUALCOMM Incorporated (QCOM)","Micron Technology, Inc. (MU)" ]
-        )
-    st.write("Selected stocks: ", '","'.join(selected_stocks))
-    
+        )    
     col1, col2 = st.columns([1.4, 2])
     with col1:   
         with st.container(border=True):

@@ -121,14 +121,5 @@ def crypto_dashboard():
         t = GoldHand(user_ticker)
         st.plotly_chart(t.plotly_last_year(tw.get_plotly_title(user_ticker)), use_container_width=False, theme=None)
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 crypto_dashboard()

@@ -7,17 +7,35 @@ from utils_data import get_tw
 tw=get_tw()
 
 
+def format_large_number(number):
+    """
+    Formats numbers in a human-readable way (e.g., 1B, 1M, 1T).
+    """
+    if number >= 1_000_000_000_000:
+        return f"{round(number / 1_000_000_000_000, 2)}T"  # Trillions
+    elif number >= 1_000_000_000:
+        return f"{round(number / 1_000_000_000, 2)}B"  # Billions
+    elif number >= 1_000_000:
+        return f"{round(number / 1_000_000, 2)}M"  # Millions
+    elif number >= 1_000:
+        return f"{round(number / 1_000, 2)}K"
+    else:
+        return f"{round(number, 2)}"
+
+
 # Functions
 def get_market_cap_crypto(ticker):
     return (tw.crypto[tw.crypto['ticker'] == ticker]['market_cap'].values[0])
 
 def process_one_ticker_crypto(ticker, view="market_cap", date_range=None):
-    print(ticker)
     """Process data for a single ticker by calculating the desired metric."""
     t = GoldHand(ticker).df
+    t['percent_change'] = t['close'] / list(t['close'])[-1]
+    t['market_cap'] = get_market_cap_crypto(ticker) * t['percent_change']
+    t['market_cap_formatted'] = t['market_cap'].apply(format_large_number)
+    t['ticker_name'] = tw.crypto[tw.crypto['ticker'] == ticker]['display_name'].values[0]
+
     if view == "Market Capitalization":
-        t['percent_change'] = t['close'] / list(t['close'])[-1]
-        t['market_cap'] = get_market_cap_crypto(ticker) * t['percent_change']
         return t
     elif view == "Percentage Change":
         t['date'] = pd.to_datetime(t['date'])
@@ -32,7 +50,7 @@ def get_crypto_compare_plot(tickers, view="market_cap", date_range=None):
     all_df = pd.concat(list(map(lambda t: process_one_ticker_crypto(t, view, date_range), tickers)))
     df = all_df.sort_values(by=['date'])
     if view == "Market Capitalization":
-    # Create the line plot
+        # Create the line plot
         fig = px.line(
             df,
             x='date',
@@ -41,8 +59,16 @@ def get_crypto_compare_plot(tickers, view="market_cap", date_range=None):
             title="Market Capitalization by Ticker Over Time",
             labels={
                 "date": "Date",
-                "market_cap": "Market Cap",
-                "ticker": "Ticker"
+                "market_cap_formatted": "Market Cap",
+                "ticker": "Ticker",
+                "ticker_name": "Crypto Name"
+            },
+            hover_data={
+                'ticker': True,                  # Include the ticker in the hover text
+                'ticker_name': True,             # Include the company name in the hover text
+                'market_cap_formatted': True,    # Include the formatted market_cap
+                'market_cap':False, 
+                'date': '|%Y-%m-%d'              # Format date
             }
         )
         
@@ -56,7 +82,16 @@ def get_crypto_compare_plot(tickers, view="market_cap", date_range=None):
             labels={
                 "date": "Date",
                 "percent_change": "Percent Change",
-                "ticker": "Ticker"
+                "market_cap_formatted": "Market Cap",
+                "ticker": "Ticker",
+                'ticker_name': 'Crypto Name'
+            },
+            hover_data={
+                'ticker': True,                  # Include the ticker in the hover text
+                'ticker_name': True,             # Include the company name in the hover text
+                'percent_change': ':.2f',        # Format percent_change with two decimal places
+                'market_cap_formatted': True,    # Include the formatted market_cap
+                'date': '|%Y-%m-%d'              # Format date
             }
         )
 
@@ -70,3 +105,6 @@ def get_crypto_compare_plot(tickers, view="market_cap", date_range=None):
 
 
 
+
+
+get_crypto_compare_plot(['ETH-USD', 'SOL-USD'],view='Market Capitalization',  date_range=['2022-01-01', '2023-01-01'])

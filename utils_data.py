@@ -12,3 +12,4 @@ def get_tw():
     tw.crypto['display_name'] = tw.crypto['base_currency_desc'] + ' (' + tw.crypto['base_currency'] + ')'
     tw.crypto['market_cap'] = tw.crypto['market_cap_calc'].astype(float)    
     return tw
+

@@ -10,8 +10,6 @@ tw=get_tw()
 
 
 
-
-
 @st.fragment
 def quantum_stock_compare_plot():
     """Display a stock comparison plot with market capitalization trends."""
@@ -24,10 +22,8 @@ def quantum_stock_compare_plot():
         selected_stocks = st.multiselect(
             "Choose stocks:",
             options=tw.stock["display_name"].tolist(),
-            default=[]
-        )
-    st.write("Selected stocks: ", '","'.join(selected_stocks))
-    
+            default=[ "International Business Machines Corporation (IBM)","Alphabet Inc. (GOOG)","Microsoft Corporation (MSFT)","Intel Corporation (INTC)","Honeywell International Inc. (HON)","NVIDIA Corporation (NVDA)","IonQ, Inc. (IONQ)","Rigetti Computing, Inc. (RGTI)","D-Wave Quantum Inc. (QBTS)","Quantum Computing Inc. (QUBT)","Alibaba Group Holding Limited (BABA)","Baidu, Inc. (BIDU)" ]
+        )    
     col1, col2 = st.columns([1.4, 2])
     with col1:   
         with st.container(border=True):
