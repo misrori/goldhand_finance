@@ -1,5 +1,9 @@
 import streamlit as st
 from goldhand import *
+from utils_data import get_tw
+
+tw=get_tw()
+
 
 # Caching the Tw object to optimize performance
 
@@ -12,13 +16,6 @@ if "cw_current_index" not in st.session_state:
      
 
 
-
-@st.cache_data()
-def get_tw():
-    tw = Tw()
-    tw.crypto['display_name'] = tw.crypto['base_currency_desc'] + ' (' + tw.crypto['base_currency'] + ')'
-    return tw
-tw = get_tw()
 
 
 def format_large_number(number):

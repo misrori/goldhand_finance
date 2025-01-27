@@ -3,13 +3,9 @@ import streamlit as st
 from goldhand import *
 import pandas as pd
 
-# Caching the Tw object to optimize performance
-@st.cache_data()
-def get_tw():
-    tw = Tw()
-    tw.stock['display_name'] = tw.stock['description'] + ' (' + tw.stock['name'] + ')'
-    return tw
-tw = get_tw()
+from utils_data import get_tw
+
+tw=get_tw()
 
 
 def update_index():

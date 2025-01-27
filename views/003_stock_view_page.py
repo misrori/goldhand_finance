@@ -1,14 +1,11 @@
 import streamlit as st
 from goldhand import *
-import pickle
 
-# Caching the Tw object for better performance
-@st.cache_data()
-def get_tw():
-    tw = Tw()
-    tw.stock['display_name'] = tw.stock['description'] + ' (' + tw.stock['name'] + ')'
-    return tw
-tw = get_tw()
+from utils_data import get_tw
+
+tw=get_tw()
+
+
 
 def update_index():
     st.session_state.sw_current_index = int(tw.stock[tw.stock['display_name'] == st.session_state.swstock].index[0])

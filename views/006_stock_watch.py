@@ -2,12 +2,9 @@ import streamlit as st
 import pandas as pd
 from goldhand import *
 
-@st.cache_data()
-def get_tw():
-    tw = Tw()
-    tw.stock['display_name'] = tw.stock['description'] + ' (' + tw.stock['name'] + ')'
-    return tw
-tw = get_tw()
+from utils_data import get_tw
+
+tw=get_tw()
 
 
 @st.cache_data()

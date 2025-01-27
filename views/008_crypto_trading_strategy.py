@@ -1,14 +1,9 @@
 # Write the Streamlit app to a file
 import streamlit as st
 from goldhand import *
+from utils_data import get_tw
 
-# Caching the Tw object to optimize performance
-@st.cache_data()
-def get_tw():
-    tw = Tw()
-    tw.crypto['display_name'] = tw.crypto['base_currency_desc'] + ' (' + tw.crypto['base_currency'] + ')'
-    return tw
-tw = get_tw()
+tw=get_tw()
 
 if "ct_current_index" not in st.session_state:
     st.session_state.ct_current_index = 0

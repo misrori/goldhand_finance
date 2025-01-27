@@ -1,5 +1,6 @@
 
 import streamlit as st
+from goldhand import *
 
 
 st.markdown("""
