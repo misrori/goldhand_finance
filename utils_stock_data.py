@@ -107,3 +107,58 @@ def get_plot(tickers, view="market_cap", date_range=None):
         height=900
     )
     return fig
+
+
+
+def custom_colorscale(value):
+    if value <= -15:
+        return -15  # Mínusz 15%-nál a legpirosabb
+    elif value >= 15:
+        return 15  # Plusz 15%-nál a legzöldebb
+    else:
+        return value  # Minden ami -15 és 15 között van, megtartja az eredeti értéket
+        
+
+
+def get_market_plot():
+     
+
+    data = tw.stock[['sector', 'industry', 'display_name', 'name', 'market_cap_basic', 'change']]
+    data['market_cap_basic'] = data['market_cap_basic'].astype(float)
+    data['change'] = data['change'].astype(float)
+    data['change_original'] = data['change']
+    data['change'] = data['change'].apply(custom_colorscale)
+    data['market_cap_text'] = data['market_cap_basic'].apply(format_large_number)
+    data['Change_text'] = data['change_original'].apply(lambda x: f"{x:.2f}%")  # Két tizedesjegy
+
+    # Oszlopok átnevezése
+    data.columns = ['Sector', 'Industry', 'Name', 'Stock', 'Market_Cap', 'Change', 'change_original', 'market_cap_text' , 'Change_text']
+
+    data['Color'] = data['Change'].apply(custom_colorscale)
+
+    fig = px.treemap(
+        data,
+        path=['Sector', 'Industry', 'Stock'],  # Hierarchia, ID helyett Display Name használata
+        values='Market_Cap',  # Méret a piaci kapitalizáció
+        color='Change',  # Szín a változás alapján
+        color_continuous_scale='RdYlGn',  # Piros-zöld skála
+        title='Stock Market Heatmap',
+        labels={
+        "market_cap_text": "Market Cap",
+        },
+        hover_data={
+            'Name': True,
+            'Sector': True,
+            'Industry': True,
+            'market_cap_text': True,
+            'Change_text': True,
+        }
+    )
+
+    fig.data[0].update(
+        hovertemplate='Name=%{customdata[0]}<br>Sector=%{customdata[1]}<br>Industry=%{customdata[2]}<br>Market Cap=%{customdata[3]}<br>Change_text=%{customdata[4]}'
+    )
+
+    fig.update_layout(height=2000, coloraxis_showscale=False)
+    return (fig)
+
