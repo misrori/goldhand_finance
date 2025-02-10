@@ -145,6 +145,7 @@ def get_market_plot():
         title='Stock Market Heatmap',
         labels={
         "market_cap_text": "Market Cap",
+        'Change_text' : "Change"
         },
         hover_data={
             'Name': True,
@@ -156,7 +157,7 @@ def get_market_plot():
     )
 
     fig.data[0].update(
-        hovertemplate='Name=%{customdata[0]}<br>Sector=%{customdata[1]}<br>Industry=%{customdata[2]}<br>Market Cap=%{customdata[3]}<br>Change_text=%{customdata[4]}'
+        hovertemplate='Name=%{customdata[0]}<br>Sector=%{customdata[1]}<br>Industry=%{customdata[2]}<br>Market Cap=%{customdata[3]}<br>Change=%{customdata[4]}'
     )
 
     fig.update_layout(height=2000, coloraxis_showscale=False)
