@@ -142,6 +142,8 @@ def get_market_plot(change_col):
     data['change'] = data['change'].apply(custom_colorscale, maxcolorchange = max_change)
     data['market_cap_text'] = data['market_cap_basic'].apply(format_large_number)
     data['Change_text'] = data['change_original'].apply(lambda x: f"{x:.2f}%")  # Két tizedesjegy
+    data['Stock_Label'] = data['name'] + "<br>" + data['Change_text'] 
+
 
     # Oszlopok átnevezése
 
@@ -162,7 +164,7 @@ def get_market_plot(change_col):
 
     fig = px.treemap(
         data,
-        path=['Sector', 'Industry', 'Stock'],  # Hierarchia, ID helyett Display Name használata
+        path=['Sector', 'Industry', 'Stock_Label'],  # Hierarchia, ID helyett Display Name használata
         values='Market Cap',  # Méret a piaci kapitalizáció
         color='Change',  # Szín a változás alapján
         color_continuous_scale='RdYlGn',  # Piros-zöld skála
