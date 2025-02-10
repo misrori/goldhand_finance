@@ -21,8 +21,8 @@ st_infos_page = st.Page(
 
 # --- STOCK ---
 
-stockmarket_view_page = st.Page(
-    "views/003_1_market_plot.py",
+stockmarket_heat_map = st.Page(
+    "views/0031_market_plot.py",
     title="Stock market heat map",
     icon=":material/bar_chart:",
 )
@@ -104,7 +104,7 @@ trends_cybersecurity_page = st.Page(
 pg = st.navigation(
     {
         "Info": [about_page, st_infos_page],
-        "Stocks": [stockmarket_view_page, stock_view_page, stock_trading_strategy_page, stock_compare_page, stock_watch_page],
+        "Stocks": [stockmarket_heat_map, stock_view_page, stock_trading_strategy_page, stock_compare_page, stock_watch_page],
         "Crypto": [crypto_view_page, crypto_trading_strategy_page, crypto_compare_page],
         "Hot trends": [ai_trend_page, quantum_trend_page, trends_cybersecurity_page],
     }
