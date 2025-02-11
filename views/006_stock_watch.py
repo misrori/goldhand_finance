@@ -1,10 +1,7 @@
 import streamlit as st
 import pandas as pd
 from goldhand import *
-
 from utils_data import get_tw
-
-tw=get_tw()
 
 
 @st.cache_data()
@@ -38,7 +35,8 @@ def zero_index():
 
 @st.fragment
 def show_stock_filter():
-    
+    tw=get_tw()
+
     # Create tabs and handle tab switching
     tab1, tab2, = st.tabs([ "🔑 Filter", "📊 Analyze"])
 
@@ -239,9 +237,5 @@ def show_stock_filter():
                 # Display the results
                 with st.container(border=True):
                     st.plotly_chart(fig, use_container_width=True, theme=None)
-
-
-
-
 
 show_stock_filter()
