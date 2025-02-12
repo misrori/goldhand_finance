@@ -31,6 +31,7 @@ if "clear_cache_executed" not in st.session_state:
 # Check and execute the code only once
 if not st.session_state["clear_cache_executed"]:
     st.cache_data.clear()  # Clear cache
+    st.cache_resource.clear()
     st.session_state["clear_cache_executed"] = True  # Mark as executed
     st.rerun()  
 
@@ -38,6 +39,7 @@ if not st.session_state["clear_cache_executed"]:
 if st.button("Clear cache and rerun"):
     st.cache_data.clear()  # Clear cache
     st.session_state["clear_cache_executed"] = True  # Mark as executed
+    st.cache_resource.clear()
     st.rerun()
 
 
