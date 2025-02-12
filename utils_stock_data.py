@@ -144,8 +144,14 @@ def get_market_plot(change_col):
     data['Change_text'] = data['change_original'].apply(lambda x: f"{x:.2f}%")  # Két tizedesjegy
     data['Stock_Label'] = data['name'] + "<br>" + data['Change_text'] 
 
-
-    # Oszlopok átnevezése
+    # filter data if sector is none
+    data = data[data['sector'].notna()]
+    data = data[data['industry'].notna()]
+    data = data[data['display_name'].notna()]
+    data = data[data['name'].notna()]
+    data = data[data['market_cap_basic'].notna()]
+    data = data[data['change'].notna()]
+        # Oszlopok átnevezése
 
     data = data.rename(columns={
         'sector': 'Sector',
