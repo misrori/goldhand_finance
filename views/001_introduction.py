@@ -1,6 +1,12 @@
 
 import streamlit as st
 from goldhand import *
+import os
+import streamlit as st
+
+# Cache mappák elérési útja
+streamlit_cache_dir = os.path.expanduser("__pycache__")
+
 
 
 st.markdown("""
@@ -23,6 +29,9 @@ Navigate using the sidebar to discover our unique features and uncover new inves
 ---
 Designed and developed with ❤️ by Orsós Mihály and powered by the **Goldhand Python Package**.
 """)
+
+
+
 
 # Initialize session state variable to track execution
 if "clear_cache_executed" not in st.session_state:

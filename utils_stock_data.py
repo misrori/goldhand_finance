@@ -120,7 +120,9 @@ def custom_colorscale(value, maxcolorchange):
         
 
 
-def get_market_plot(change_col):
+def get_market_plot(tw, change_col):
+    
+
     if change_col == 'change':
         max_change = 15
     elif change_col == 'Perf.W':
