@@ -3,6 +3,7 @@ import streamlit as st
 from goldhand import *
 from utils_data import get_tw
 
+tw=get_tw()
 
 if "ct_current_index" not in st.session_state:
     st.session_state.ct_current_index = 0
@@ -13,7 +14,6 @@ def update_crypto_index():
 
 @st.fragment
 def show_crypto_strategy_tester():
-    tw=get_tw()
 
 
     # Introduction section

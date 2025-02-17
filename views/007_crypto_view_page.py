@@ -2,6 +2,7 @@ import streamlit as st
 from goldhand import *
 from utils_data import get_tw
 
+tw=get_tw()
 
 
 # Caching the Tw object to optimize performance
@@ -34,7 +35,6 @@ def format_large_number(number):
 
 @st.fragment
 def crypto_dashboard():
-    tw=get_tw()
     
     col1, col2, col3 = st.columns([2, 1.4, 2])
     with col1:

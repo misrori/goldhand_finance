@@ -2,6 +2,7 @@ import streamlit as st
 from goldhand import *
 from utils_data import get_tw
 
+tw=get_tw()
 
 
 def update_index():
@@ -15,7 +16,7 @@ if "sw_current_index" not in st.session_state:
 @st.fragment
 def stock_dashboard():
     """Stock Dashboard for displaying stock details and visualizations."""
-    tw=get_tw()
+    
 
     # First row: Dropdown menu for stock selection and additional info
     col1, col2, col3,  = st.columns([2, 1.4, 1.3], vertical_alignment="center")

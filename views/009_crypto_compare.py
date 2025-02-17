@@ -4,11 +4,11 @@ import pandas as pd
 import plotly.express as px
 from utils_data import get_tw
 from utils_crypto_data import *
+tw = get_tw()
 
 
 @st.fragment
 def crypto_compare_plot():
-    tw = get_tw()
     """Display a cryptocurrency comparison plot with market capitalization trends."""
     # Create the interface
     st.title("Cryptocurrency Selector")

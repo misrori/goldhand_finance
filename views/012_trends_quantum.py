@@ -5,11 +5,11 @@ import plotly.express as px
 from utils_data import get_tw
 from utils_stock_data import *
 
+tw=get_tw()
 
 
 @st.fragment
 def quantum_stock_compare_plot():
-    tw=get_tw()
     
     """Display a stock comparison plot with market capitalization trends."""
     # Create the interface

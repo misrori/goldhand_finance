@@ -3,6 +3,8 @@ import streamlit as st
 from goldhand import *
 import pandas as pd
 from utils_data import get_tw
+tw=get_tw()
+
 
 def update_index():
     st.session_state.stt_current_index = int(tw.stock[tw.stock['display_name'] == st.session_state.sttstock].index[0])
@@ -15,7 +17,6 @@ if "stt_current_index" not in st.session_state:
 @st.fragment
 def show_strategy_tester():
     """Display the trading strategy tester interface."""
-    tw=get_tw()
 
     # Introduction section
     st.title("Trading Strategies")

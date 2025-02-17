@@ -5,12 +5,12 @@ import plotly.express as px
 from utils_data import get_tw
 from utils_stock_data import *
 
+tw=get_tw()
 
 @st.fragment
 def stock_compare_plot():
     """Display a stock comparison plot with market capitalization trends."""
     # Create the interface
-    tw=get_tw()
     
     st.title("Stock Selector")
     st.write("Select multiple stocks to analyze their market capitalization trends.")

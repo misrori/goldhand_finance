@@ -2,13 +2,12 @@
 import streamlit as st
 from goldhand import *
 from utils_stock_data import *
+tw = get_tw()
 
 
 @st.fragment
 def stock_heat_map():
     
-    tw = get_tw()
-
     with st.container(border=True):
         st.markdown("## Market Performance Heatmap")
         col1, col2 = st.columns([2, 1])
