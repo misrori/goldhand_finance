@@ -7,7 +7,7 @@ tw = get_tw()
 
 @st.fragment
 def base_plot_chart():
-    with st.expander('### Stock chart', expanded=True):
+    with st.expander('### Stock chart', expanded=False):
         selected_description = st.selectbox("", tw.stock["display_name"])
         user_ticker = tw.stock.loc[tw.stock['display_name']==selected_description, "name"].values[0]
 
