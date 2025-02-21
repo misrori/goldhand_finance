@@ -6,6 +6,17 @@ tw = get_tw()
 
 
 @st.fragment
+def base_plot_chart():
+    with st.expander('### Stock chart', expanded=True):
+        selected_description = st.selectbox("", tw.stock["display_name"])
+        user_ticker = tw.stock.loc[tw.stock['display_name']==selected_description, "name"].values[0]
+
+        with st.container(border=True):
+            t = GoldHand(user_ticker)
+            st.plotly_chart(t.plotly_last_year(tw.get_plotly_title(user_ticker)), use_container_width=False, theme=None)
+
+
+@st.fragment
 def stock_heat_map():
     
     with st.container(border=True):
@@ -45,9 +56,10 @@ def stock_heat_map():
                 st.rerun()
 
 
+
     with st.spinner("Generating plot..."):
         fig = get_market_plot(tw, selelcted_change_col)
         st.plotly_chart(fig, use_container_width=True, theme=None)
 
-
+base_plot_chart()
 stock_heat_map()
