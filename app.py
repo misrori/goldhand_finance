@@ -53,6 +53,11 @@ stock_watch_page = st.Page(
 
 
 # --- CRYPTO ---
+crypto_heat_map = st.Page(
+    "views/0081_crypto_heat_map.py",
+    title="Crypto market heat map",
+    icon=":material/bar_chart:",
+)
 
 crypto_view_page = st.Page(
     "views/007_crypto_view_page.py",
@@ -103,7 +108,7 @@ pg = st.navigation(
     {
         "Info": [about_page, st_infos_page],
         "Stocks": [stockmarket_heat_map, stock_view_page, stock_trading_strategy_page, stock_compare_page, stock_watch_page],
-        "Crypto": [crypto_view_page, crypto_trading_strategy_page, crypto_compare_page],
+        "Crypto": [crypto_heat_map, crypto_view_page, crypto_trading_strategy_page, crypto_compare_page],
         "Hot trends": [ai_trend_page, quantum_trend_page, trends_cybersecurity_page],
     }
 )
