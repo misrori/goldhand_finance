@@ -36,11 +36,11 @@ def crypto_heat_map():
 
     crypto_df['category'] = crypto_df['category'].apply(get_first_category)
     crypto_df['Change'] = crypto_df['Change'].astype(float)
+    crypto_df['Change_text'] = crypto_df['Change'].apply(lambda x: f"{x:.2f}%")  # Két tizedesjegy
     crypto_df['Change'] = crypto_df['Change'].apply(custom_colorscale, maxcolorchange = 15)
 
     crypto_df['Market Cap'] = crypto_df['Market Cap'].astype(float)
     crypto_df['market_cap_text'] = crypto_df['Market Cap'].apply(format_large_number)
-    crypto_df['Change_text'] = crypto_df['Change'].apply(lambda x: f"{x:.2f}%")  # Két tizedesjegy
     crypto_df['Crypto_Label'] = crypto_df['Name']
 
 
@@ -71,3 +71,13 @@ def crypto_heat_map():
 
 base_crypto_plot_chart()
 crypto_heat_map()
+
+
+
+
+
+    data['change'] = data[change_col].astype(float)
+    data['change_original'] = data['change']
+    data['change'] = data['change'].apply(custom_colorscale, maxcolorchange = max_change)
+    data['market_cap_text'] = data['market_cap_basic'].apply(format_large_number)
+    data['Change_text'] = data['change_original'].apply(lambda x: f"{x:.2f}%")  # Két tizedesjegy
