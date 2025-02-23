@@ -74,10 +74,3 @@ crypto_heat_map()
 
 
 
-
-
-    data['change'] = data[change_col].astype(float)
-    data['change_original'] = data['change']
-    data['change'] = data['change'].apply(custom_colorscale, maxcolorchange = max_change)
-    data['market_cap_text'] = data['market_cap_basic'].apply(format_large_number)
-    data['Change_text'] = data['change_original'].apply(lambda x: f"{x:.2f}%")  # Két tizedesjegy
