@@ -21,7 +21,7 @@ def quantum_stock_compare_plot():
         selected_stocks = st.multiselect(
             "Choose stocks:",
             options=tw.stock["display_name"].tolist(),
-            default=[ "International Business Machines Corporation (IBM)","Alphabet Inc. (GOOG)","Microsoft Corporation (MSFT)","Intel Corporation (INTC)","Honeywell International Inc. (HON)","NVIDIA Corporation (NVDA)","IonQ, Inc. (IONQ)","Rigetti Computing, Inc. (RGTI)","D-Wave Quantum Inc. (QBTS)","Quantum Computing Inc. (QUBT)","Alibaba Group Holding Limited (BABA)","Baidu, Inc. (BIDU)" ]
+            default=[ "International Business Machines Corporation (IBM)","Alphabet Inc. (GOOG)","Microsoft Corporation (MSFT)","Intel Corporation (INTC)","Honeywell International Inc. (HON)","NVIDIA Corporation (NVDA)","IonQ, Inc. (IONQ)","Rigetti Computing, Inc. (RGTI)","D-Wave Quantum Inc. (QBTS)","Quantum Computing Inc. (QUBT)","Alibaba Group Holding Limited Sponsored ADR (BABA)","Baidu, Inc. Sponsored ADR Class A (BIDU)" ]
         )    
     col1, col2 = st.columns([1.4, 2])
     with col1:   
