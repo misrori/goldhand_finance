@@ -2,3 +2,4 @@
 __pycache__/*
 views/old.py
 venv
+/.venv
