@@ -119,7 +119,7 @@ def crypto_dashboard():
         
     with st.container(border=True):
         t = GoldHand(user_ticker)
-        fig = t.plotly_last_year(plot_title=tw.get_plotly_title(crypto_name), ndays=ndays)
+        fig = t.plot_goldhand_line(plot_title=tw.get_plotly_title(user_ticker), ndays=ndays)
         st.plotly_chart(fig, use_container_width=True, theme=None)
     
 

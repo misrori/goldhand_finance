@@ -85,7 +85,7 @@ def stock_dashboard():
         
     with st.container(border=True):
         t = GoldHand(user_ticker)
-        fig = t.plot_goldhand_line(plot_title=tw.get_plotly_title(company_name), ndays=ndays)
+        fig = t.plot_goldhand_line(plot_title=tw.get_plotly_title(user_ticker), ndays=ndays)
         st.plotly_chart(fig, use_container_width=True, theme=None)
 
     # Fourth row: Sector and industry analysis plots
