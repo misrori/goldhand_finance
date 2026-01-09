@@ -38,12 +38,13 @@ def stock_dashboard():
     #company_data = tw.stock.loc[tw.stock["display_name"] == selected_description].iloc[0]
     user_ticker = tw.stock.loc[st.session_state.sw_current_index, "name"]
     company_data = tw.stock.loc[st.session_state.sw_current_index]
+    tradingview_id = tw.stock.loc[st.session_state.sw_current_index, "tradingview_id"]
     
 
     with col2:
         with st.container(border=True):
             st.markdown("##### More Info")
-            tradingview_url = f"https://www.tradingview.com/chart/?symbol={user_ticker}"
+            tradingview_url = f"https://www.tradingview.com/chart/?symbol={tradingview_id}"
             st.markdown(
                 f'<a href="{tradingview_url}" target="_blank" style="text-decoration:none;">'
                 f'<button style="background-color:#1E90FF; color:white; border:none; border-radius:5px; padding:10px 15px; font-size:16px;">'

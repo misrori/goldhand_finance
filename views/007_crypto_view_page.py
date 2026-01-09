@@ -52,6 +52,8 @@ def crypto_dashboard():
     
     user_ticker = tw.crypto.loc[st.session_state.cw_current_index, "ticker"]
     crypto_data = tw.crypto.loc[st.session_state.cw_current_index]
+    tradingview_id = tw.crypto.loc[st.session_state.cw_current_index, "tradingview_id"]
+
     
     
 
@@ -59,7 +61,7 @@ def crypto_dashboard():
         with st.container(border=True):
             st.markdown("##### More info")
 
-            tradingview_url = f"https://www.tradingview.com/chart/?symbol={user_ticker}"
+            tradingview_url = f"https://www.tradingview.com/chart/?symbol={tradingview_id}"
             st.markdown(
                 f'<a href="{tradingview_url}" target="_blank" style="text-decoration:none;">'
                 f'<button style="background-color:#1E90FF; color:white; border:none; border-radius:5px; padding:10px 15px; font-size:16px;">'
